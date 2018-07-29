@@ -21,5 +21,5 @@ def email_is_valid(email):
 
 
 def phone_is_valid(phone):
-    regex = r'^((\+7|7|8)+([0-9]){10})$'
+    regex = r'^((\+\d)+([0-9]){10})$'
     return False if re.match(regex, phone) is None else True

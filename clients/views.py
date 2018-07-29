@@ -5,7 +5,7 @@ from .models import Contact
 from .tables import ContactTable
 from .forms import ContactForm
 from django.shortcuts import redirect
-from src.Reader import read
+from src.Reader import read, read_from_json_place_holder
 from src.BreffiScrap import get_worth
 from src.Validation import phone_is_valid, email_is_valid
 
@@ -59,7 +59,7 @@ def remove_all(request):
     elif request.method == "POST" and '_cancel' in request.POST:
         return redirect('contact_list')
 
-    return render(request, 'clients/remove_all.html')
+    return render(request, 'clients/confirm.html', {'text': 'to delete all items'})
 
 
 def contact_details(request, pk):
@@ -119,3 +119,25 @@ def contact_add(request):
     else:
         form = ContactForm()
         return render(request, 'clients/contact_new.html', {'form': form})
+
+
+def load_from_json(request):
+
+    if request.method == "POST" and '_confirm' in request.POST:
+        gen = read_from_json_place_holder()
+        for item in gen:
+            contact = Contact.objects.create(name=item['name'],
+                                             company=item['company'],
+                                             email=item['email'],
+                                             phone=item['phone'],
+                                             interests=item['interests']
+                                             )
+            contact.save()
+        return redirect('contact_list')
+
+    elif request.method == "POST" and '_cancel' in request.POST:
+        return redirect('contact_list')
+
+
+    return render(request, 'clients/confirm.html', {'text': 'load data from JsonPlaceHolder'})
+

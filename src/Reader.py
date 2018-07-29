@@ -1,5 +1,6 @@
 import json
 import csv
+import urllib.request
 
 
 def json_read(file):
@@ -35,3 +36,30 @@ def read(file):
                'phone': phone,
                'interests': interests
                }
+
+
+def make_number_as_russian(number):
+    n = str(number).rsplit(' ', 1)[0]
+    for ch in ['-', '(', ')', '.']:
+        n = n.replace(ch, '')
+    return "+" + n
+
+
+def read_from_json_place_holder():
+    url_to_json = "https://jsonplaceholder.typicode.com/users"
+    with urllib.request.urlopen(url_to_json) as url:
+        data = json.loads(url.read().decode())
+        for obj in data:
+            name = obj['name']
+            company = obj['company']['name']
+            email = obj['email']
+            phone = make_number_as_russian(obj['phone'])
+            interests = obj['company']['catchPhrase']
+            yield {'name': name,
+                   'company': company,
+                   'email': email,
+                   'phone': phone,
+                   'interests': interests
+                   }
+
+
