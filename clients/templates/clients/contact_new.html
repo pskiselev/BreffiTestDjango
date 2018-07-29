@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>BreffiTest</title>
+</head>
+
+<body>
+ <h1>New Contact</h1>
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ form.as_p }}
+
+        <input class="btn btn-primary" type="submit" value="Cancel" name="_cancel"/>
+        <input class="btn btn-primary" type="submit" value="Create" name="_create"/>
+    </form>
+
+</body>
+</html>

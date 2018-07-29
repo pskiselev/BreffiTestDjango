@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>BreffiTest</title>
+    </head>
+
+    <body>
+        <div>
+            <h1>Запись</h1>
+        </div>
+
+        <div>
+            <p>Id: {{ contact.id }}</p>
+            <p>Company: {{ contact.name }}</p>
+            <p>Email: {{ contact.email }}</p>
+            <p>Phone: {{ contact.phone }}</p>
+            <p>Interests: {{ contact.interests }}</p>
+        </div>
+
+
+        <form action="" method="post"> {% csrf_token %}
+            <input class="btn btn-primary" type="submit" value="Cancel" name="_cancel"/>
+        </form>
+
+
+    </body>
+
+</html>

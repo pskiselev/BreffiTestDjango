@@ -1,0 +1,70 @@
+{# tutorial/templates/tutorial/people.html #}
+{% load render_table from django_tables2 %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>BreffiTest</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    </head>
+
+    <style>.layer{border:1px; border-style:solid; border-color:#0000FF;padding: 1px;}</style>
+    <style>.column {
+        float: left;
+        width: 15.00%;
+        }</style>
+
+    <style>.row:after {
+    content: "";
+    display: table;
+    clear: both;
+    }</style>
+
+    <body>
+        <div>
+            <h1><strong>Contacts</strong></h1>
+        </div>
+
+        <div class="row">
+        {% for value in worth %}
+            <div class="column">
+                {{value.number}}
+            </div>
+
+            <div class="column">
+                {{ value.title }}
+            </div>
+
+            <div class="column">
+                {{ value.text }}
+            </div>
+        {% endfor %}
+        </div>
+
+
+
+        <div>
+            <a href="create_new" class=layer>&ensp;Add&ensp;</a>
+            <a href="remove_all" class=layer>Remove all</a>
+        </div>
+
+        {% render_table table %}
+
+        <form action="" method="post"> {% csrf_token %}
+            <input class="btn btn-primary" type="submit" value="&ensp;Export as CSV&emsp;" name="_export_csv"/>
+            <input class="btn btn-primary" type="submit" value="&ensp;Export as JSON&emsp;" name="_export_json"/>
+        </form>
+
+        <p> </p>
+
+
+        <form enctype="multipart/form-data" action="" method="post"> {% csrf_token %}
+            <input class="btn btn-primary" type="file" name="uploaded_file"/>
+            <input class="btn btn-primary" type="submit" value="&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Import&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;" name="_import"/>
+        </form>
+
+    </body>
+
+</html>

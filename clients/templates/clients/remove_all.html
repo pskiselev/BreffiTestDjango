@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BreffiTest</title>
+</head>
+<body>
+
+    <form action="" method="post"> {% csrf_token %}
+        <p>Are you sure you want to delete all items?</p>
+        <input class="btn btn-primary" type="submit" value="Confirm" name="_confirm"/>
+        <input class="btn btn-primary" type="submit" value="Cancel" name="_cancel"/>
+    </form>
+
+</body>
+</html>
